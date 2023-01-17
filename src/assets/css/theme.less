@@ -1,0 +1,25 @@
+.container {
+    background-color: #272a37;
+    --el-menu-bg-color: #272a37;
+    --el-menu-border-color: #272a37;
+    --el-menu-text-color: #fff;
+    --el-menu-active-color: #ff9393;
+    .el-button {
+        &:hover {
+            background-color: transparent;
+        }
+    }
+    .el-button.is-plain {
+        --el-button-hover-text-color: #fff;
+        // --el-button-hover-bg-color: var(--el-fill-color-blank);
+        --el-button-hover-border-color: #fff;
+    }
+    .el-button--danger.is-link, .el-button--danger.is-plain, .el-button--danger.is-text {
+        --el-button-text-color: #ff9393;
+        --el-button-bg-color: transparent;
+        --el-button-border-color: #ff9393;
+        --el-button-hover-text-color: #ffaaaa;
+        --el-button-hover-border-color: #ffaaaa;
+        --el-button-hover-bg-color: transparent;
+    }
+}
