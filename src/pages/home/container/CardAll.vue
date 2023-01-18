@@ -79,7 +79,7 @@ const onSearch = val => {
     return;
   }
   const res = carStore.allCardList.filter(item => {
-    return item.text?.search(val) > -1 || toCamelWithSpace(item.id).toUpperCase() === val.toUpperCase() || item.explicitMod.some(ex => ex.value?.search(val) > -1);
+    return item.name?.search(val) > -1 || toCamelWithSpace(item.id).toUpperCase() === val.toUpperCase() || item.explicitMod.some(ex => ex.value?.search(val) > -1);
   });
   currentList.value = res.map(item => ({
     ...item,
@@ -95,13 +95,13 @@ const onReload = () => {
   getCarData();
 };
 
-const onSelected = type => {
-  const current = currentList.value.find(item => item.id === type);
+const onSelected = id => {
+  const current = currentList.value.find(item => item.id === id);
   if (current) current.selected = !current.selected;
   if (current.selected) {
     selecteData.value.push(current);
   } else {
-    selecteData.value = selecteData.value.filter(item => item.id !== type);
+    selecteData.value = selecteData.value.filter(item => item.id !== id);
   }
 };
 
@@ -137,7 +137,7 @@ const beforeClose = done => {
 };
 
 onMounted(() => {
-  selecteData.value = carStore.allCardList.filter(item => props.defaultSelected.some(c => c.type === item.id));
+  selecteData.value = carStore.allCardList.filter(item => props.defaultSelected.some(c => c.id === item.id));
   getCarData();
 });
 

@@ -12,8 +12,8 @@ export const useCardStore = defineStore('comic', {
         SAVE_FILTER_CARD (list = []) {
             this.filterCard = list;
         },
-        REMOVE_CARD_BY_TYPE(type) {
-            this.filterCard = this.filterCard.filter(item => item.type !== type)
+        REMOVE_CARD_BY_ID(id) {
+            this.filterCard = this.filterCard.filter(item => item.id !== id)
         },
         GET_ALL_CAR ({ page = 1, pagesize = 10}) {
             return JSON.parse(JSON.stringify(this.allCardList)).slice((page - 1) * pagesize, pagesize * page);
@@ -22,14 +22,13 @@ export const useCardStore = defineStore('comic', {
             const { label } = data;
             // 当前已选择列表
             const arr = list.map(item => ({
-                type: item.id,
-                key: toCamelWithSpace(item.id),
+                ...item,
                 label
             }));
             // 先查询选中的
             // 从总列表排除当前的分类,如果在其它分类中也一并排除。总觉得怪怪的
             const exclouldCurrent = this.filterCard.filter(item => {
-                return item.label !== label && arr.every(c => c.type !== item.type);
+                return item.label !== label && arr.every(c => c.id !== item.id);
             });
             // 再全部添加回去
             exclouldCurrent.push(...arr);

@@ -1,77 +1,98 @@
-Show # 命运卡 - 名字冲突的低价值卡先过滤
+Show # 命运卡类 - 有重名卡纠错区
     Class Divination Card
     BaseType "The Wolf's Shadow" "The Master Artisan" "The Demoness"
-    SetTextColor 210 224 227 # 名字冲突的低价值卡先过滤
-    SetBackgroundColor 0 0 0 240 # 名字冲突的低价值卡先过滤
-    SetBorderColor 210 224 227 # 名字冲突的低价值卡先过滤
     SetFontSize 38
 
-
-Show # 命运卡 - T1*
+Show # 命运卡类 - 超级价值组(疯医，镜子卡等S21修改)
     Class Divination Card
-    BaseType "The Apothecary" "The Doctor" "The Fiend" "House of Mirrors" "The Demon" "Unrequited Love" "Love Through Ice" "The Price of Devotion" "The Shieldbearer" "The Insane Cat" "Divine Beauty"
-    SetTextColor 255 255 255 # T1
-    SetBackgroundColor 255 40 0 230 # T1
-    SetBorderColor 255 40 0 0 # T1
-    SetFontSize 70
+    BaseType "House of Mirrors" "The Doctor" "The Fiend" "The Demon" "The Apothecary" "The Shieldbearer" "The Price of Devotion" "Unrequited Love" "Love Through Ice" "The Wedding Gift" "The Insane Cat"
+    SetTextColor 255 255 255 255 # 超级价值组(疯医，镜子卡等S21修改)命运卡类
+    SetBackgroundColor 255 40 0 220 # 超级价值组(疯医，镜子卡等S21修改)命运卡类
+    SetBorderColor 175 96 37 # 超级价值组(疯医，镜子卡等S21修改)命运卡类
+    SetFontSize 60
+    DisableDropSound True
+    CustomAlertSound "文子过滤音效\奏乐.mp3" 300
     MinimapIcon 0 Red Square
     PlayEffect Red
-    CustomAlertSound "音效\超级卡片.mp3" 300
-    DisableDropSound
 
-
-Show # 命运卡 - T2*
+Show # 命运卡类 - T0崇高价值组（S21修改）
     Class Divination Card
-    BaseType "Abandoned Wealth" "The Dragon's Heart" "The Iron Bard" "The Samurai's Eye" "The Nurse" "Seven Years Bad Luck" "The Old Man" "Nook's Crown" "The Price of Loyalty" "Succor of the Sinless" "Gift of Asenath" "The Long Con" "Desecrated Virtue" "Winter's Embrace" "Broken Promises" "Deadly Joy" "Luminous Trove" "The Rabbit's Foot" "Eternal Bonds" "The Scout" "Judging Voices" "Magnum Opus" "Duality" "Imperfect Memories" "The Hook" "The Destination" "A Fate Worse Than Death" "Wealth and Power" "The Immortal" "Alluring Bounty" "The Cheater" "Brother's Stash" "The Wedding Gift" "The Leviathan"
-    SetTextColor 210 0 0 # T2
-    SetBackgroundColor 255 255 255 # T2
-    SetBorderColor 210 0 0 # T2
+    BaseType "The Cheater" "Desecrated Virtue" "The Immortal" "The Nurse" "The Sephirot" "Wealth and Power" "Seven Years Bad Luck" "Divine Beauty" "Akil's Prophecy"
+    SetTextColor 255 255 255 255 # T0崇高价值组（S21修改）命运卡类
+    SetBackgroundColor 255 40 0 220 # T0崇高价值组（S21修改）命运卡类
+    SetBorderColor 175 96 37 # T0崇高价值组（S21修改）命运卡类
+    SetFontSize 60
+    DisableDropSound True
+    CustomAlertSound "文子过滤音效\恭喜发财.mp3" 300
+    MinimapIcon 0 Red Square
+    PlayEffect Red
+
+Show # 命运卡类 - T1命运卡（S20修改）
+    Class Divination Card
+    BaseType "The Samurai's Eye" "The Price of Loyalty" "Choking Guilt" "Brother's Stash" "The Strategist" "The Dragon's Heart" "The Enlightened" "Doryani's Epiphany" "The Patient" "Succor of the Sinless" "A Fate Worse Than Death" "The Transformation"
+    SetTextColor 210 0 0 # T1命运卡（S20修改）命运卡类
+    SetBorderColor 210 0 0 # T1命运卡（S20修改）命运卡类
+    SetBackgroundColor 255 255 255 255 # T1命运卡（S20修改）命运卡类
     SetFontSize 50
-    MinimapIcon 0 Purple Square
-    PlayEffect Purple
-    CustomAlertSound "音效\高级卡片.mp3" 300
-    DisableDropSound
+    DisableDropSound True
+    CustomAlertSound "文子过滤音效\这张卡太赞了.mp3" 300
+    MinimapIcon 0 Orange Square
+    PlayEffect Orange
 
-
-Show # 命运卡 - T3
+Show # 命运卡类 - T2命运卡（S21修改）
     Class Divination Card
-    BaseType "The Hoarder" "The Artist" "The Vast" "The Enlightened" "Hunter's Reward" "The Soul" "The Sephirot" "Dying Anguish" "The Spark and the Flame" "The Saint's Treasure" "Blessing of God" "The Undaunted" "The Celestial Stone" "The Mayor" "Burning Blood" "Pride of the First Ones" "Dark Dreams" "Remembrance" "Azyran's Reward" "The Eye of Terror" "The Damned" "The Escape" "The Chosen" "Etched in Blood" "The Strategist" "Council of Cats" "The Hive of Knowledge" "A Note in the Wind" "The Greatest Intentions" "The Sustenance" "The Awakened" "A Familiar Call" "The Gulf" "The Bitter Blossom" "The Academic" "Unchained" "The Whiteout" "Fateful Meeting" "The Astromancer" "Keeper's Corruption" "The Patient" "Brotherhood in Exile" "The Enthusiasts" "The Eternal War" "The Shortcut" "The Offspring" "The Price of Prescience" "Terrible Secret of Space" "Lachrymal Necrosis" "Dementophobia" "Ambitious Obsession" "Desperate Crusade" "Treasures of the Vaal" "The Magma Crab" "The Aspirant" "Bijoux" "Silence and Frost" "Beauty Through Death" "Monochrome" "The Tumbleweed" "Altered Perception" "Darker Half" "The Forward Gaze" "Further Invention" "Home" "Rebirth and Renewal" "Choking Guilt" "Doryani's Epiphany" "Endless Night" "Auspicious Ambitions" "Ever-Changing" "A Dusty Memory" "The Return of the Rat" "The Finishing Touch" "The Enforcer"
-    SetTextColor 3 15 254 # T3
-    SetBackgroundColor 255 255 255 # T3
-    SetBorderColor 3 15 254 # T3
-    SetFontSize 40
+    BaseType "Alluring Bounty" "The Gulf" "The Destination" "Magnum Opus" "The Astromancer" "Luminous Trove" "Gemcutter's Mercy" "Eternal Bonds" "The Artist" "Home" "The Academic" "Darker Half" "Deadly Joy" "The Sacrifice" "Broken Promises" "The Last One Standing" "The Devastator" "The World Eater" "The Endless Darkness" "Vile Power" "The Mad King"
+    SetTextColor 255 0 255 # T2命运卡（S21修改）命运卡类
+    SetBorderColor 255 0 255 # T2命运卡（S21修改）命运卡类
+    SetBackgroundColor 255 255 255 # T2命运卡（S21修改）命运卡类
+    SetFontSize 45
+    DisableDropSound True
+    CustomAlertSound "文子过滤音效\这张卡不错.mp3" 300
+    MinimapIcon 1 Pink Square
+    PlayEffect Pink
+
+Show # 命运卡类 - T3命运卡（S21修改）
+    Class Divination Card
+    BaseType "Haunting Shadows" "Remembrance" "The Craving" "The Enlightened" "The Escape" "The Hoarder" "Void of the Elements" "A Note in the Wind" "Blessing of God" "Chaotic Disposition" "The Bitter Blossom" "The Celestial Stone" "The Queen" "A Familiar Call" "Buried Treasure" "Dark Dreams" "Draped in Dreams" "Dying Light" "Etched in Blood" "Reckless Ambition" "Squandered Prosperity" "The Bargain" "The Eldritch Decay" "The Life Thief" "The Mayor" "The Offering" "The Soul" "The Undaunted" "Bowyer's Dream" "Burning Blood" "Cameria's Cut" "Peaceful Moments" "Pride Before the Fall" "The Awakened" "The Bones" "The Cartographer" "The Polymath" "The Primordial" "The Celestial Justicar" "Brotherhood in Exile" "Divine Justice" "Mawr Blaidd" "Prometheus' Armoury" "The Dapper Prodigy" "The Ethereal" "The Fishmonger" "The Old Man" "The Porcupine" "The Valkyrie" "The Vast" "The Void" "The Whiteout" "The King's Heart" "The Seeker" "A Dab of Ink" "Emperor of Purity" "Winter's Embrace" "Sambodhi's Wisdom " "The Eternal War" "A Modest Request" "The Hook" "Ambitious Obsession" "Dementophobia" "Lachrymal Necrosis" "Costly Curio" "The Blessing of Moosh" "Terrible Secret of Space" "The Mind's Eyes" "The Offspring" "The Catch" "Disdain" "Guardian's Challenge" "Desperate Crusade" "The Journey" "Heterochromia" "The Thaumaturgist" "The Obscured" "The Cursed King" "The Jeweller's Boon" "The Devastator" "The Wind" "The Tinkerer's Table" "The Wolven King's Bite" "The Hive of Knowledge" "Keeper's Corruption" "The Tireless Extractor" "Justified Ambition" "The Forgotten Treasure" "Immortal Resolve" "The Forward Gaze" "The Dungeon Master" "The Magma Crab" "Endless Night" "The Enforcer" "The Leviathan" "Checkmate" "Lethean Temptation" "Something Dark" "Spark and the Flame" "Gift of Asenath" "Altered Perception" "The Rabbit's Foot" "Imperfect Memories" "The Eye of Terror" "The Progeny of Lunaris" "The Chosen" "The Hunger" "Pride of the First Ones" "The Sustenance" "Beauty Through Death" "Nook's Crown" "The Damned" "The Scout" "Fateful Meeting" "The Long Con" "The Aspirant" "The Astromancer" "Abandoned Wealth" "The Greatest Intentions" "The One That Got Away" "The White Knight" "Council of Cats" "Bijoux" "Azyran's Reward" "The Professor" "A Stone Perfected" "Chasing Risk" "The Polymath" "Judging Voices"
+    SetTextColor 255 128 255 # T3命运卡（S21修改）命运卡类
+    SetBorderColor 255 128 255 # T3命运卡（S21修改）命运卡类
+    SetFontSize 42
+    DisableDropSound True
+    CustomAlertSound "文子过滤音效\命运卡.mp3" 300
     MinimapIcon 1 Cyan Square
-    PlayEffect Yellow
-    CustomAlertSound "音效\中级卡片.mp3" 300
-    DisableDropSound
+    PlayEffect Cyan
 
-
-Show # 命运卡 - T4
+Show # 命运卡类 - 新赛季未知命运卡（S21修改）
     Class Divination Card
-    BaseType "The Dark Mage" "Chaotic Disposition" "The Pact" "The Celestial Justicar" "The Chains that Bind" "Humility" "The Aesthete" "Bowyer's Dream" "Last Hope" "The Warlord" "The Ethereal" "The Dapper Prodigy" "The Sephirot" "Heterochromia" "The Void" "Emperor of Purity" "The Valkyrie" "The Porcupine" "The Wretched" "The Wolven King's Bite" "The Valley of Steel Boxes" "The Obscured" "The Breach" "Immortal Resolve" "The Master" "Perfection" "The Professor" "The Endless Darkness" "The Price of Protection" "Boon of the First Ones" "The Sacrifice" "The Messenger" "Arrogance of the Vaal" "Alone in the Darkness" "The Progeny of Lunaris" "Vanity" "Imperial Legacy" "Baited Expectations" "The Craving" "The Easy Stroll" "The Eldritch Decay" "The White Knight" "Haunting Shadows" "Draped in Dreams" "A Modest Request" "The Emptiness" "A Stone Perfected" "Guardian's Challenge" "The Forgotten Treasure" "The One That Got Away" "Parasitic Passengers" "Misery in Darknes" "Justified Ambition" "The Side Quest" "The Dungeon Master" "The Brawny Battle Mage" "Alivia's Grace" "Man With Bear" "The Shepherd's Sandals" "Checkmate" "Something Dark"
-    SetTextColor 9 242 196 # T4
-    SetBackgroundColor 0 0 0 255 # T4
-    SetBorderColor 9 242 196 # T4
-    SetFontSize 38
-    MinimapIcon 2 Yellow Square
-    PlayEffect Yellow
-    CustomAlertSound "音效\中级卡片.mp3" 300
+    BaseType "Misery in Darkness" "Parasitic Passengers" "Duality" "The Price of Protection" "Man With Bear" "Alivia's Grace" "Auspicious Ambitions" "Ever-Changing" "A Dusty Memory" "The Return of the Rat" "The Finishing Touch"
+    SetTextColor 255 128 255 # 新赛季未知命运卡（S21修改）命运卡类
+    SetBorderColor 255 128 255 # 新赛季未知命运卡（S21修改）命运卡类
+    SetFontSize 42
+    DisableDropSound True
+    CustomAlertSound "文子过滤音效\命运卡.mp3" 300
+    MinimapIcon 1 Cyan Square
+    PlayEffect Cyan
 
-
-Show # 命运卡 - T5
+Show # 命运卡类 - T4命运卡（S20修改）
     Class Divination Card
-    BaseType "Three Faces in the Dark" "The Brittle Emperor" "Hope" "Vinia's Token" "The Summoner" "The Cataclysm" "The Hunger" "The Avenger" "Time-Lost Relic" "Lucky Connections" "Rain of Chaos" "The Watcher" "Coveted Possession" "The King's Heart" "The Wind" "Gemcutter's Promise" "The Inventor" "The Union" "The Queen" "Humility" "The Betrayal" "The Encroaching Darkness" "The Wrath" "The Catalyst" "The Survivalist" "The Jester" "Loyalty" "Pride Before the Fall" "Audacity" "Scholar of the Seas" "Anarchy's Price" "The Thaumaturgist" "The Fletcher" "The Cartographer" "The Offering" "The Lion" "The Risk" "Earth Drinker" "The Visionary" "The Throne" "Lucky Deck" "The Scavenger" "Mawr Blaidd" "The Polymath" "The Opulent" "No Traces" "The Blazing Fire" "Rebirth" "The Insatiable" "The Dreamer" "The World Eater" "The Jeweller's Boon" "The Darkest Dream" "The Fathomless Depths" "The Dreamland" "The Hale Heart" "The Rite of Elements" "The Innocent" "The Wilted Rose" "The Twilight Moon" "A Dab of Ink" "The Master Artisan" "The Life Thief" "The Seeker" "The Journey" "The Landing" "Sambodhi's Vow" "Burning Blood" "The Primordial" "The Fool" "The Heroic Shot" "The Bargain" "Akil's Prophecy" "Void of the Elements" "Underground Forest" "Deathly Designs" "Cameria's Cut" "Divine Justice" "The Bones" "Squandered Prosperity" "The Tinkerer's Table" "Peaceful Moments" "Triskaidekaphobia" "The Unexpected Prize" "The Journalist" "Acclimatisation" "Society's Remorse" "Reckless Ambition" "Sambodhi's Wisdom" "Prejudice" "A Sea of Blue" "The Mind's Eyes" "The Blessing of Moosh" "Costly Curio" "The Rabbit's Foot" "Chasing Risk" "The Prince of Darkness" "The Catch" "Disdain" "The Fox in the Brambles" "The Transformation" "The Tireless Extractor" "From Bone to Ashes"
-    SetTextColor 254 170 0 # T5
-    SetBackgroundColor 0 0 0 240 # T5
-    SetBorderColor 254 170 0 # T5
-    SetFontSize 38
-    MinimapIcon 2 White Square
-    CustomAlertSound "音效\卡片.mp3" 300
+    BaseType "Boon of Justice" "The Lord of Celebration" "Sambodhi's Vow" "The Messenger" "The Arena Champion" "The Gladiator" "Glimmer of Hope" "The Tyrant" "The Union" "The Risk" "Scholar of the Seas" "Lucky Deck" "The Penitent" "Lysah's Respite" "The Inventor" "The Jester" "Vinia's Token" "Rats" "The Wrath" "Hope" "Treasure Hunter" "The Body" "Jack in the Box" "The Traitor" "Valley of Steel Boxes" "Wretched" "Might is Right" "The Fletcher" "The Forsaken" "The Formless Sea" "Time-Lost Relic" "The Wolf" "Standoff" "Merciless Armament" "The Fathomless Depths" "Harmony of Souls" "The Puzzle" "Rebirth" "The Realm" "No Traces" "The Dreamland" "The Admirer" "The Darkest Dream" "The Beast" "The Cacophony" "The Innocent" "Loyalty" "The Encroaching Darkness" "Birth of the Three " "Time-Lost Relic" "Lucky Connections" "The Chains that Bind" "The Jester" "The Warlord" "The Ethereal" "The Throne" "Shard of Fate" "Luck of the Vaal" "The Garish Power" "The Twilight Moon" "Echoes of Love" "Thirst for Knowledge" "The Fool" "The Deep Ones" "Bowyer's Dream" "Perfection" "The Undisputed" "The Wilted Rose" "Boon of the First Ones" "The Landing" "The Dark Mage" "Last Hope" "The Warlord" "The Aesthete" "The Stormcaller" "The Breach" "Left to Fate" "Atziri's Arsenal" "Lingering Remnants" "Imperial Legacy" "Assassin's Favour" "The Side Quest" "The Skeleton" "The Deal" "The Wolf's Legacy" "The Mountain" "Friendship" "Underground Forest" "Deathly Designs" "Arrogance of the Vaal" "The Pack Leader" "The Wretched" "The Gladiator" "The Lion" "The Hale Heart" "Monochrome" "Vanity" "More is Never Enough" "Baited Expectations" "The Tumbleweed" "The Betrayal" "Three Voices" "The Cache" "Unchained" "The Unexpected Prize" "The Scavenger" "The Heroic Shot" "Acclimatisation" "Volatile Power" "Triskaidekaphobia" "A Mother's Parting Gift" "Alone in the Darkness" "Anarchy's Price" "Audacity" "Blind Venture" "Boundless Realms" "The Enthusiasts" "Brush" " Paint and Palette" "Prejudice" "The Card Sharp" "The Price of Prescience" "The Emptiness" "The Fox in the Brambles" "The Insatiable" "Further Invention" "The Brawny Battle Mage" "From Bone to Ashes" "Broken Truce" "The Shepherd's Sandals" "Azure Rage" "Astral Protection" "The Incantation" "The Dreamer" "The Brittle Emperor" "Humility" "The Spark and the Flame" "The Master" "Hunter's Reward" "Saint's Treasure" "Dying Anguish" "The Prince of Darkness" "Silence and Frost" "Rebirth and Renewal" "The Iron Bard"
+    SetTextColor 255 255 119 # T4命运卡（S20修改）命运卡类
+    SetBorderColor 255 255 119 # T4命运卡（S20修改）命运卡类
+    SetFontSize 40
+    DisableDropSound True
+    CustomAlertSound "文子过滤音效\命运卡.mp3" 300
+    MinimapIcon 2 Cyan Square
+    PlayEffect Cyan
 
-
-Show # 命运卡 - 剩余卡片(可一键屏蔽)
+Show # 命运卡类 - T5命运卡
     Class Divination Card
-    SetTextColor 210 224 227 # 剩余卡片(可一键屏蔽)
-    SetBackgroundColor 0 0 0 240 # 剩余卡片(可一键屏蔽)
-    SetBorderColor 210 224 227 # 剩余卡片(可一键屏蔽)
+    BaseType "Three Faces in the Dark" "Lantador's Lost Love" "The Battle Born" "Vinia's Token" "The Summoner" "The Cataclysm" "The Drunken Aristocrat" "The Dark Mage" "The Gemcutter" "The Gambler" "The Lover" "The Road to Power" "The Avenger" "Emperor's Luck" "Rain of Chaos" "Coveted Possession" "Gemcutter's Promise" "The Inventor" "Jack in the Box" "The Union" "Doedre's Madness" "The Trial" "The Catalyst" "The Fox" "The Doppelganger" "Grave Knowledge" "The Thaumaturgist" "The Surveyor" "Hubris" "Merciless Armament" "The Cartographer" "Lost Worlds" "The Body" "Her Mask" "Treasure Hunter" "The Visionary" "The Web" "The Harvester" "The Stormcaller" "The Endurance" "The Penitent" "The Wolverine" "Mitts" "The Standoff" "Call to the First Ones" "The Opulent" "Atziri's Arsenal" "The Eye of the Dragon" "The Blazing Fire" "The Dreamer" "The Deceiver" "The Sword King's Salute" "The Celestial Stone" "The Undisputed" "The Archmage's Right Hand" "The Easy Stroll" "The Poet" "The Road to Power" "The Explorer" "Gift of the Gemling Queen" "The Survivalist" "The Surveyor" "The Valley of Steel Boxes" "The Opulent" "The Rite of Elements" "The Journalist" "Society's Remorse" "Cartographer's Delight" "Cursed Words" "Dark Temptation" "Death" "Demigod's Wager" "Destined to Crumble" "Dialla's Subjugation" "Earth Drinker" "Forbidden Power" "The Adventuring Spirit" "The Shortcut" "A Sea of Blue" "The Last Supper"
+    SetTextColor 255 255 255 # T5命运卡命运卡类
+    SetBackgroundColor 20 124 194 # T5命运卡命运卡类
     SetFontSize 38
+    DisableDropSound True
+
+Show # 命运卡类 - 其他命运卡（屏蔽命运卡前先屏蔽这里）
+    Class Divination Card
+    SetFontSize 38
+    DisableDropSound True

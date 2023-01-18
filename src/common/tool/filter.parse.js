@@ -2,58 +2,52 @@
 const parseLine = (str = '') => {
     const list = str.split(/\n/);
     const titleStr = list.splice(0, 1)[0];
+
+    const tempList = list.reduce((prev, current) => {
+        const arr = current.search('"') > -1 ? current.replace(/#.*/, '').trim().split(/\s"/) : current.replace(/#.*/, '').trim().split(/\s/);
+        const type = arr.splice(0, 1);
+        prev[type[0]] = arr.flat().join(',').replace(/\"/g, '');
+        return prev;
+    }, {});
+    // sharket的不标准 
+    // 算了解析不了反正我不用
+    const sharketDesc = list.find(item => item.search('SetTextColor') > -1)?.split('#')[1]||''.trim();
+    // console.log(sharketDesc);
     const titleObj = {
         status: titleStr.split(/\s[#|-]\s/)[0] === 'Show',
-        title: titleStr.split(/\s[#|-]\s/)[1].trim(),
-        scTitle: titleStr.split(/\s[#|-]\s/)[2].trim(),
+        title: titleStr.split(/\s[#|-]\s/)[1] || sharketDesc || ''.trim(),
+        scTitle: titleStr.split(/\s[#|-]\s/)[2] || sharketDesc || ''.trim(),
         desc: (titleStr.split(/\s[#|-]\s/)[3] || '').trim(),
     };
     return {
         ...titleObj,
-        ...list.reduce((prev, current) => {
-            const arr = current.search('"') > -1 ? current.replace(/#.*/, '').trim().split(/\s"/) : current.replace(/#.*/, '').trim().split(/\s/);
-            const type = arr.splice(0, 1);
-            prev[type[0]] = arr.flat().join(',').replace(/\"/g, '');
-            return prev;
-        }, {}),
+        ...tempList,
     };
 };
-// 合并同类项
-const mergeList = (list = [], key = 'title', id = 1) => {
 
-    const fun = (arr = [], key = 'title', i) => {
-        return arr.reduce((prev, current) => {
-            if (!prev) prev = [];
-            let index = prev.findIndex(item => item.label === current[key]);
-            if (index === -1) {
-                prev.push({ label: current[key], children: [], id: `${i}-${prev.length}` });
-                index = prev.length - 1;
-            }
-            prev[index].children.push({
-                ...current,
-                label: current.desc || current.scTitle || current.title,
-                id: `${prev[index].id}-${prev[index].children.length}`,
-                disabled: (current.desc || current.scTitle || current.title).endsWith('*')
-            });
-            return prev;
-        }, []);
-    };
-    const parent = fun(list, key, id);
-    return parent.map(item => ({ ...item, children: fun(item.children, 'scTitle', item.id) }));
+const groupByTitle = (array, key) => {
+    const arr = array.reduce((prev, current) => {
+        const name = current[key];
+        if (!prev[name]) prev[name] = [];
+        prev[name].push(current);
+        return prev;
+    }, {});
+    return Object.keys(arr).map((k, i) => ({
+        id: `${key}-${i}`,
+        label: k,
+        title: arr[k][0].title || '',
+        children: arr[k].map((c, index) => ({
+            ...c,
+            id: `${key}-${i}-${index}`,
+            label: c.desc || c.scTitle || c.label,
+            disabled: (c.desc || c.scTitle || c.title).endsWith('*')
+        }))
+    }));
 };
 
 export const filterParse = (str = '') => {
-    const titleReg = /# ----------(.*)----------/g;
-    const reg = /# ----------.*----------\n\n/
-    const ROOT_CLASS = str.split(reg);
-    const TITLE_LIST = str.match(titleReg);
-    ROOT_CLASS.splice(0, 1);
-    const DETAIL_LIST = TITLE_LIST.map((item, i) => ({
-        id: `${i + 1}`,
-        label: item.replace(/#|\s|-/g, ''),
-        children: mergeList(ROOT_CLASS[i].split(/\n\n/).filter(m => m).map(child => parseLine(child)), 'title', `${i + 1}`),
-    }));
-    return DETAIL_LIST;
+    const DETAIL_LIST = str.replace(/\r/g, '').split(/\n\n/).filter(m => m && /^[Show|Hide]/.test(m)).map(item => parseLine(item));
+    return groupByTitle(groupByTitle(DETAIL_LIST, 'scTitle'), 'title');
 };
 
 
@@ -86,9 +80,9 @@ export const compileData = (arr = []) => {
             return prev;
         }
         if (key === 'CustomAlertSound') {
-            prev += `    ${key} "${data.split(' ')[0]}" ${data.split(' ')[1]||300}\n`
+            prev += `    ${key} "${data.split(' ')[0]}" ${data.split(' ')[1] || 300}\n`;
         } else {
-            prev += `    ${key} ${data.split(',').join(' ').trim()}${key.endsWith('Color') ? ` # ${(item.desc || item.scTitle).replace('*', '')}` : ''}\n`;
+            prev += `    ${key} ${data.split(',').join(' ').trim()}${key.endsWith('Color') ? ` # ${(item.desc || item.scTitle).replace('*', '')}${item.title}` : ''}\n`;
         }
         return prev;
     }, '')).join(`\n`);

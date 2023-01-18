@@ -1,7 +1,7 @@
 <template>
   <el-container class="container">
     <el-header class="header">
-      <div class="web-title">POE TOOL</div>
+      <div class="web-title">POE TOOL  <span style="font-size:12px">(不支持Sharket！不支持Sharket！不支持Sharket！)</span></div>
     </el-header>
     <el-container style="min-height: 200px">
       <el-aside width="150px">

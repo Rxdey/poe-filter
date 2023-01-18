@@ -7,7 +7,7 @@
     </div>
     <div class="card-wrap">
       <div class="card-aside">
-        <el-tree default-expand-all ref="treeRef" :data="data" :props="defaultProps" @node-click="handleNodeClick" node-key="id" show-checkbox highlight-current :default-checked-keys="defaultCheckedList" :indent="8" empty-text="">
+        <el-tree :default-expand-all="false" ref="treeRef" :data="data" :props="defaultProps" @node-click="handleNodeClick" node-key="id" show-checkbox highlight-current :default-checked-keys="defaultCheckedList" :indent="8" empty-text="">
           <template #default="{ node, data }">
             <span class="custom-tree-node">
               <span>{{ node.label }}</span>
@@ -26,7 +26,7 @@
   <el-dialog v-model="showModal" title="不想写了，请自行复制替换" class="update-card-dialog">
     <div class="tip">
       <!-- <p>点击此链接前往编年史 <a href="https://poedb.tw/cn/Divination_Cards#命运卡物品" target="_blank">流亡编年史#命运卡物品 </a></p> -->
-      <el-input v-model="textarea" :rows="20" type="textarea" readonly/>
+      <el-input v-model="textarea" :rows="20" type="textarea" readonly />
     </div>
   </el-dialog>
 </template>
@@ -61,17 +61,31 @@ const handleNodeClick = node => {
 const getFilterCardList = async jsonData => {
   // 保存全部已在过滤器单独设置的卡片
   const filterCardList = [];
-  jsonData[0].children[0].children.forEach(item => {
-    item.children.forEach(child => {
-      if (!child.BaseType) return;
-      const list = child.BaseType?.split(',').map(c => ({
-        type: c.toLowerCase().replace(/\s/g, '-'),
-        key: c,
-        label: child.label
-      }));
-      filterCardList.push(...list);
+  jsonData.forEach(child => {
+      child.children.forEach(item => {
+        item.children.forEach(child => {
+          if (!child.BaseType) return;
+          const list = child.BaseType?.split(',').map(c => ({
+            id: c.toLowerCase().replace(/\s/g, '-').replace(/'/g, ''),
+            type: c,
+            label: child.label
+          }));
+          filterCardList.push(...list);
+        });
+      });
     });
-  });
+  // jsonData[0]
+  // .children.forEach(item => {
+  //   item.children.forEach(child => {
+  //     if (!child.BaseType) return;
+  //     const list = child.BaseType?.split(',').map(c => ({
+  //       id: c.toLowerCase().replace(/\s/g, '-').replace(/'/g, ''),
+  //       type: c,
+  //       label: child.label
+  //     }));
+  //     filterCardList.push(...list);
+  //   });
+  // });
   cardStore.SAVE_FILTER_CARD(filterCardList);
 };
 const onFileChange = async e => {
@@ -82,13 +96,16 @@ const onFileChange = async e => {
     return;
   }
   const txt = await readFile(file);
-  const jsonData = filterParse(txt).filter(item => item.label === '命运卡大类');
+  const jsonData = filterParse(txt)
+  .filter(item => /命运卡/.test(item.label));
   console.log(jsonData);
+  currentSelected.value = null;
+  textarea.value = '';
   data.value = jsonData;
   defaultCheckedList.value = flatArray(jsonData)
     .filter(item => item.status)
     .map(item => item.id);
-
+  // 命运卡编辑
   getFilterCardList(jsonData);
 };
 const onImport = () => {
@@ -104,9 +121,9 @@ const groupBy = (arr = [], key = '') => {
 const onSave = () => {
   const filterCard = JSON.parse(JSON.stringify(cardStore.filterCard));
   const result = [];
-  data.value[0].children[0].children.map((item, i) => {
+  data.value[0].children.map((item, i) => {
     item.children.forEach(card => {
-      const currentCard = groupBy(filterCard, card.label).map(item => item.key);
+      const currentCard = groupBy(filterCard, card.label).map(item => item.type);
       result.push({
         ...card,
         BaseType: currentCard.reduce((p, n) => {
@@ -125,8 +142,11 @@ const onSave = () => {
 </script>
 
 <style lang="less" scoped>
-// .home {
-// }
+.home {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
 .tool-bar {
   margin-bottom: 16px;
 }
@@ -135,13 +155,21 @@ const onSave = () => {
   height: 100%;
   display: flex;
   flex-flow: row nowrap;
+  flex: 1;
+  min-height: 1px;
+  overflow: hidden;
   .card-aside {
     width: 280px;
     padding: 0 16px;
+    overflow-y: auto;
   }
   .card-main {
     flex: 1;
     min-width: 1px;
+    overflow-y: auto;
   }
+}
+.el-dialog.update-card-dialog {
+  --el-dialog-width: 700px;
 }
 </style>

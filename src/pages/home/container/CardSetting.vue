@@ -8,7 +8,7 @@
         <el-icon><Plus /></el-icon>
         <div class="add-card-mask"></div>
       </div>
-      <Card v-for="(card, i) in cardList" :key="card.type" :name="card.type" @onCardClick="onCardRemove" />
+      <Card v-for="(card, i) in cardList" :key="card.type" :name="card.id" @onCardClick="onCardRemove" />
     </div>
   </div>
   <CardAll v-model="showAddModal" :defaultSelected="cardList" :data="props.data" v-if="showAddModal" />
@@ -20,6 +20,7 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 import { useCardStore } from '@/store/modules/useCardStore';
 import CardAll from './CardAll.vue';
 import Card from '@/components/Card/Card.vue';
+import { toCamel, toCamelWithSpace } from '@/utils';
 
 const props = defineProps({
   data: {
@@ -33,14 +34,15 @@ const cardList = computed(() => cardStore.getFilterCardByLabel(props.data.label)
 const styles = computed(() => formatStyles(props.data));
 
 // 从当前分组移除卡片
-const onCardRemove = type => {
-  ElMessageBox.confirm('确定要从此分类移除该卡片吗？', '移除卡片', {
+const onCardRemove = id => {
+  console.log(id);
+  ElMessageBox.confirm(`确定要从此分类移除该卡片${toCamelWithSpace(id)}吗？`, '移除卡片', {
     'confirmButtonText': '确定移除',
     'cancelButtonText': '取消',
     'confirm-button-class': 'confirmButton'
   })
     .then(() => {
-      cardStore.REMOVE_CARD_BY_TYPE(type);
+      cardStore.REMOVE_CARD_BY_ID(id);
       ElMessage({
         type: 'success',
         message: '已移除'
@@ -48,10 +50,6 @@ const onCardRemove = type => {
     })
     .catch(() => {});
 };
-
-onMounted(() => {
-  // console.log(cardList.value)
-});
 
 const formatStyles = data => {
   if (!data) return;

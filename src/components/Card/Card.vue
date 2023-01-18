@@ -2,8 +2,8 @@
   <div class="Card">
     <div class="card-background"><img v-if="data" :src="getImgUrl(data.id)" /></div>
     <div class="card-mask" v-if="data">
-      <div :class="['card-stack', !data.stack ? 'single' : '']">{{ data.stack || '1' }}</div>
-      <div class="card-name">{{ data.text }}</div>
+      <div :class="['card-stack', !data.stack ? 'single' : '']">{{ (data.stack || '1').replace(/\s/, '') }}</div>
+      <div class="card-name">{{ data.name }}</div>
       <div class="card-exmod">
         <template v-for="(desc, index) in data.explicitMod" :key="index">
           <span :class="desc.type">{{ desc.value }}</span>
@@ -34,7 +34,7 @@ import { ref, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { toCamel, toCamelWithSpace } from '@/utils';
 // import InventoryIcon from '@/assets/img/InventoryIcon.webp'
-import { CARD_INFO } from '@/common/data/item.static';
+import { useCardStore } from '@/store/modules/useCardStore';
 
 const props = defineProps({
   name: {
@@ -60,6 +60,7 @@ const props = defineProps({
 });
 const data = ref(null);
 const emit = defineEmits(['onCardClick']);
+const cardStore = useCardStore();
 
 const getImgUrl = str => {
   return `https://poe.game.qq.com/image/divination-card/${toCamel(str)}.png`;
@@ -71,11 +72,11 @@ const onCardClick = () => {
 
 onMounted(() => {
   if (!props.name) return;
-  data.value = CARD_INFO().find(item => item.id === props.name) || null;
+  data.value = cardStore.allCardList.find(item => item.id === props.name) || null;
 });
 watch(() => props.name, (val) => {
   if (!val) return;
-  data.value = CARD_INFO().find(item => item.id === val) || null;
+  data.value = cardStore.allCardList.find(item => item.id === val) || null;
 })
 </script>
 
@@ -126,12 +127,13 @@ watch(() => props.name, (val) => {
   .card-stack {
     color: #c8c8c8;
     font-size: 11px;
-    width: 15%;
+    width: 30px;
     height: 22px;
-    top: 44%;
-    left: 8%;
+    top: 45%;
+    left: 6%;
     position: absolute;
     transform: scale(0.6);
+    text-align: center;
     &.single {
       color: #1ba29b;
     }
