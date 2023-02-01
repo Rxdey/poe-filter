@@ -14,9 +14,9 @@ const parseLine = (str = '') => {
     const sharketDesc = list.find(item => item.search('SetTextColor') > -1)?.split('#')[1]||''.trim();
     // console.log(sharketDesc);
     const titleObj = {
-        status: titleStr.split(/\s[#|-]\s/)[0] === 'Show',
-        title: titleStr.split(/\s[#|-]\s/)[1] || sharketDesc || ''.trim(),
-        scTitle: titleStr.split(/\s[#|-]\s/)[2] || sharketDesc || ''.trim(),
+        status: titleStr.split(/[#|-]/)[0].trim() === 'Show',
+        title: (titleStr.split(/[#|-]/)[1] || sharketDesc || '').trim(),
+        scTitle: (titleStr.split(/\s[#|-]\s/)[2] || sharketDesc || '').trim(),
         desc: (titleStr.split(/\s[#|-]\s/)[3] || '').trim(),
     };
     return {
