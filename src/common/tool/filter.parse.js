@@ -11,13 +11,19 @@ const parseLine = (str = '') => {
     }, {});
     // sharket的不标准 
     // 算了解析不了反正我不用
-    const sharketDesc = list.find(item => item.search('SetTextColor') > -1)?.split('#')[1]||''.trim();
-    // console.log(sharketDesc);
+    const sharketDesc = (list.find(item => item.search('SetTextColor') > -1)?.split('#')[1] || '').trim();
+
+    // 拆分标题
+    const titleStrArr = titleStr.split(/[#|-]/).map(item => item.trim());
+    if (titleStrArr.length === 1) {
+        titleStrArr.push(sharketDesc);
+    }
     const titleObj = {
-        status: titleStr.split(/[#|-]/)[0].trim() === 'Show',
-        title: (titleStr.split(/[#|-]/)[1] || sharketDesc || '').trim(),
-        scTitle: (titleStr.split(/\s[#|-]\s/)[2] || sharketDesc || '').trim(),
-        desc: (titleStr.split(/\s[#|-]\s/)[3] || '').trim(),
+        status: titleStrArr[0].trim() === 'Show',
+        label: titleStrArr[titleStrArr.length - 1],
+        disabled: titleStrArr[titleStrArr.length - 1].endsWith('*'),
+        deepLevel: titleStrArr.length - 1,
+        titleArr: titleStrArr.length >= 3 ? titleStrArr.slice(1, titleStrArr.length - 1) : titleStrArr.slice(1, 2),
     };
     return {
         ...titleObj,
@@ -45,9 +51,70 @@ const groupByTitle = (array, key) => {
     }));
 };
 
+// 转换为tree
+const toTree = (array) => {
+    const result = [];
+    if (!Array.isArray(array)) return result;
+    // 清除已存在的children 重新赋值
+    // array.forEach(item => {
+    //     delete item.children;
+    // });
+    const map = {};
+    array.forEach(item => {
+        map[item.id] = item;
+    });
+    array.forEach((item, i) => {
+        let parent = map[item.pid];
+        if (parent) {
+            (parent.children || (parent.children = [])).push(item);
+        } else {
+            result.push(item);
+        }
+    });
+    return result;
+};
+// 合并同类
+const mergeTree = (tree, id = '') => {
+    const result = [];
+    if (!Array.isArray(tree)||!tree.length) return result;
+    tree.forEach((item, index) => {
+        // 查询是否存在
+        const i = result.findIndex(t => t.label === item.label);
+        const pid = `${id ? id + '-' : ''}${index}`;
+
+        if (i > -1) {
+            result[i].children = mergeTree([...(result[i].children || []), ...(item.children||[])], result[i].id);
+        } else {
+            result.push({
+                ...item,
+                id: pid,
+                pid: id,
+                children: item.children ? mergeTree(item.children, pid) : null
+            })
+        }
+    });
+    return result;
+}
+
+const groupByTitleArr = (array) => {
+    // 转换格式
+    const titleStrArrList = array.map((item) => {
+        const r = item.titleArr.map((t, i) => {
+            const arr = { label: t, id: i, pid: i > 0 ? i - 1 : '' };
+            if (i === item.titleArr.length - 1) {
+                arr.children = [item];
+            }
+            return arr;
+        });
+        return toTree(r)[0];
+    });
+    return mergeTree(titleStrArrList);
+};
+
 export const filterParse = (str = '') => {
     const DETAIL_LIST = str.replace(/\r/g, '').split(/\n\n/).filter(m => m && /^[Show|Hide]/.test(m)).map(item => parseLine(item));
-    return groupByTitle(groupByTitle(DETAIL_LIST, 'scTitle'), 'title');
+    return groupByTitleArr(DETAIL_LIST);
+    // return DETAIL_LIST;
 };
 
 

@@ -11,7 +11,7 @@
         <Load v-if="!data">请先导入</Load>
       </div>
       <div class="card-main">
-        <!-- <CardSetting v-if="!!currentSelected" :data="currentSelected" /> -->
+        <Priview v-if="!!currentSelected" :data="currentSelected" />
       </div>
     </div>
     <input type="file" id="file" @change="onFileChange" hidden ref="inputRef" />
@@ -30,7 +30,7 @@ import { ElMessage } from 'element-plus';
 import { getSuffix, readFile } from '@/utils';
 import { filterParse, flatArray, compileData } from '@/common/tool/filter.parse';
 // import { useCardStore } from '@/store/modules/useCardStore';
-// import CardSetting from './container/CardSetting.vue';
+import Priview from './container/Priview.vue';
 import Load from '@/components/Load/Load.vue';
 import FilterTree from '@/components/FilterTree/FilterTree.vue';
 
@@ -62,9 +62,7 @@ const onFileChange = async e => {
   currentSelected.value = null;
   textarea.value = '';
   data.value = jsonData;
-  defaultCheckedList.value = flatArray(jsonData)
-    .filter(item => item.status)
-    .map(item => item.id);
+  defaultCheckedList.value = flatArray(jsonData).filter(item => item.status).map(item => item.id);
 };
 const onImport = () => {
   document.querySelector('#file').value = '';

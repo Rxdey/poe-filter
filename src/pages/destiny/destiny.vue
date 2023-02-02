@@ -7,7 +7,7 @@
     </div>
     <div class="card-wrap">
       <div class="card-aside">
-        <FilterTree :data="data" :default-checked-keys="defaultCheckedList" @node-click="handleNodeClick" default-expand-all/>
+        <FilterTree :data="data" :default-checked-keys="defaultCheckedList" @node-click="handleNodeClick" default-expand-all />
         <Load v-if="!data">请先导入</Load>
       </div>
       <div class="card-main">
@@ -52,16 +52,14 @@ const getFilterCardList = async jsonData => {
   // 保存全部已在过滤器单独设置的卡片
   const filterCardList = [];
   jsonData.forEach(child => {
-    child.children.forEach(item => {
-      item.children.forEach(child => {
-        if (!child.BaseType) return;
-        const list = child.BaseType?.split(',').map(c => ({
-          id: c.toLowerCase().replace(/\s/g, '-').replace(/'/g, ''),
-          type: c,
-          label: child.label
-        }));
-        filterCardList.push(...list);
-      });
+    child.children.forEach(child => {
+      if (!child.BaseType) return;
+      const list = child.BaseType?.split(',').map(c => ({
+        id: c.toLowerCase().replace(/\s/g, '-').replace(/'/g, ''),
+        type: c,
+        label: child.label
+      }));
+      filterCardList.push(...list);
     });
   });
   // jsonData[0]
