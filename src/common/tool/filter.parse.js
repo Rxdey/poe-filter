@@ -24,8 +24,47 @@ const parseLine = (str = '') => {
             tempObj[item] = parseInt(tempList[item]);
             return;
         }
+        if (['DisableDropSound'].includes(item)) {
+            tempObj[item] = true;
+            return;
+        }
+        if (['MinimapIcon'].includes(item)) {
+            // tempObj[item] = true;
+            const miniMapIconConf = tempList[item].split(',');
+            tempObj[item] = {
+                size: miniMapIconConf[0] || '',
+                color: miniMapIconConf[1] || '',
+                shape: miniMapIconConf[2] || '',
+                show: true,
+            }
+            return;
+        }
+        if (['PlayEffect'].includes(item)) {
+            const PlayEffectConf = tempList[item].split(',');
+            tempObj[item] = {
+                Colour: PlayEffectConf[0] || '',
+                Temp: !PlayEffectConf[1],
+                show: true,
+            }
+            return;
+        }
         return tempObj[item] = tempList[item];
     });
+    if (!tempObj.PlayEffect) {
+        tempObj.PlayEffect = {
+            Colour: 'White',
+            Temp: false,
+            show: false,
+        }
+    }
+    if (!tempObj.MinimapIcon) {
+        tempObj.PlayEffect = {
+            size: 2,
+            color: 'White',
+            shape: 'Circle',
+            show: false,
+        }
+    }
     // sharket的不标准 
     // 算了解析不了反正我不用
     const sharketDesc = (list.find(item => item.search('SetTextColor') > -1)?.split('#')[1] || '').trim();

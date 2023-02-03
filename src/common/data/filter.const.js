@@ -1,13 +1,8 @@
 // Circle, Diamond, Hexagon, Square, Star, Triangle, Cross, Moon, Raindrop, Kite, Pentagon, UpsideDownHouse
 
-const miniMapShape = {};
-const miniMapColour = {};
-const miniMapMaxSize = 2;
-const miniMapMinSize = 0;
+export const COLOUR_OPTION = ['Red', 'Green', 'Blue', 'Brown', 'White', 'Yellow', 'Cyan', 'Grey', 'Orange', 'Pink', 'Purple'];
 
-
-
-export const predefineColors = [
+export const PREDEFINE_COLORS = [
   'rgba(255,255,255,1)',
   'rgba(0,0,0,1)',
   'rgba(255,40,0,.9)',

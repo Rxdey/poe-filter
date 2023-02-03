@@ -7,63 +7,52 @@
       <div class="config-card">
         <div class="form-wrap">
           <div class="form-item">
-            <!-- <p class="form-label">字体大小</p> -->
             <div class="field">
               <el-slider v-model="conf.SetFontSize" :min="1" :max="45" />
             </div>
             <div class="form-label">字体大小</div>
           </div>
           <div class="form-item">
-            <el-color-picker v-model="conf.SetTextColor" show-alpha :predefine="predefineColors" />
+            <el-color-picker v-model="conf.SetTextColor" show-alpha :predefine="PREDEFINE_COLORS" />
             <div class="form-label">文字颜色</div>
           </div>
           <div class="form-item">
-            <el-color-picker v-model="conf.SetBackgroundColor" show-alpha :predefine="predefineColors" />
+            <el-color-picker v-model="conf.SetBackgroundColor" show-alpha :predefine="PREDEFINE_COLORS" />
             <div class="form-label">背景颜色</div>
           </div>
           <div class="form-item">
-            <el-color-picker v-model="conf.SetBorderColor" show-alpha :predefine="predefineColors" />
+            <el-color-picker v-model="conf.SetBorderColor" show-alpha :predefine="PREDEFINE_COLORS" />
             <div class="form-label">边框颜色</div>
           </div>
+          <div class="form-item" v-if="conf.PlayEffect">
+            <el-switch v-model="conf.PlayEffect.show" style="--el-switch-on-color: #f56c6c; --el-switch-off-color: #555968" />
+            <div class="form-label">{{ conf.PlayEffect.show ? '移除光柱' : '添加光柱' }}</div>
+          </div>
+          <template v-if="conf.PlayEffect && conf.PlayEffect.show">
+            <div class="form-item">
+              <el-select v-model="conf.PlayEffect.Colour" placeholoder="光柱颜色">
+                <el-option v-for="item in COLOUR_OPTION" :key="item" :label="item" :value="item" />
+              </el-select>
+              <div class="form-label">光柱颜色<span class="tip">(样式不准确)</span></div>
+            </div>
+            <div class="form-item">
+              <el-switch v-model="conf.PlayEffect.Temp" style="--el-switch-on-color: #f56c6c; --el-switch-off-color: #555968" />
+              <div class="form-label">光柱持续可见<span class="tip">(一般不动它)</span></div>
+            </div>
+          </template>
           <!-- <div class="form-item btn">
             <el-button round type="default" plain @click="onRe">还原设置</el-button>
           </div> -->
         </div>
       </div>
     </div>
-    <!-- <div class="config"> -->
-    <!-- 
-      <el-form class="config-mode" label-width="120px" label-position="left">
-        <el-form-item label="小地图图标大小:">
-          <el-slider v-model="conf.size" size="small" :min="1" :max="45" />
-        </el-form-item>
-        <el-form-item label="小地图图标形状:">
-          <el-select v-model="conf.shape" class="m-2" placeholder="Select">
-            <el-option v-for="item in [1,2,3]" :key="item" :label="item" :value="item" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="小地图图标颜色:">
-          <el-color-picker v-model="conf.bColor" show-alpha :predefine="predefineColors" />
-        </el-form-item>
-        <el-form-item label="光柱颜色:">
-          <el-color-picker v-model="conf.bColor" show-alpha :predefine="predefineColors" />
-        </el-form-item>
-      </el-form> -->
-
-    <!-- 
-      <p>小地图图标大小</p>
-      <p>小地图图标形状</p>
-      <p>小地图图标颜色</p>
-      <p>彩色光柱</p> -->
-    <!-- </div> -->
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { predefineColors } from '@/common/data/filter.const';
+import { PREDEFINE_COLORS, COLOUR_OPTION } from '@/common/data/filter.const';
 import StylePrview from '@/components/StylePrview/StylePrview.vue';
 
 const props = defineProps({
@@ -161,11 +150,26 @@ onMounted(() => {
     &.btn {
       margin-top: 32px;
     }
+    .el-select {
+      --el-select-input-focus-border-color: transparent;
+      --el-select-border-color-hover: transparent;
+      max-width: 120px;
+      border-bottom: 1px solid #6c6e72;
+      .el-input__wrapper {
+        border: none;
+        // border-bottom: ;
+        box-shadow: none;
+      }
+    }
   }
   .form-label {
     // margin: 8px 0;
     font-size: 14px;
     padding: 0 0 0 16px;
+    .tip {
+      font-size: 12px;
+      color: gray;
+    }
   }
 }
 </style>
