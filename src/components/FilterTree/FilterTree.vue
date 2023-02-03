@@ -9,7 +9,7 @@
   </el-tree>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onMounted, getCurrentInstance } from 'vue';
 
 const props = defineProps({

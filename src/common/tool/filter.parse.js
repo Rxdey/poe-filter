@@ -2,13 +2,30 @@
 const parseLine = (str = '') => {
     const list = str.split(/\n/);
     const titleStr = list.splice(0, 1)[0];
-
     const tempList = list.reduce((prev, current) => {
         const arr = current.search('"') > -1 ? current.replace(/#.*/, '').trim().split(/\s"/) : current.replace(/#.*/, '').trim().split(/\s/);
         const type = arr.splice(0, 1);
         prev[type[0]] = arr.flat().join(',').replace(/\"/g, '');
         return prev;
     }, {});
+    const tempObj = {};
+    Object.keys(tempList).map(item => {
+        if (['SetBackgroundColor', 'SetBorderColor', 'SetTextColor'].includes(item)) {
+            const color = tempList[item].split(',');
+            if (color.length === 4) {
+                color[3] = Math.floor((color[3] / 255) * 100) / 100;
+            } else {
+                color.push(1);
+            }
+            tempObj[item] = `rgba(${color.join(',')})`;
+            return
+        }
+        if (['SetFontSize'].includes(item)) {
+            tempObj[item] = parseInt(tempList[item]);
+            return;
+        }
+        return tempObj[item] = tempList[item];
+    });
     // sharket的不标准 
     // 算了解析不了反正我不用
     const sharketDesc = (list.find(item => item.search('SetTextColor') > -1)?.split('#')[1] || '').trim();
@@ -25,9 +42,10 @@ const parseLine = (str = '') => {
         deepLevel: titleStrArr.length - 1,
         titleArr: titleStrArr.length >= 3 ? titleStrArr.slice(1, titleStrArr.length - 1) : titleStrArr.slice(1, 2),
     };
+    
     return {
         ...titleObj,
-        ...tempList,
+        ...tempObj,
     };
 };
 
@@ -76,25 +94,25 @@ const toTree = (array) => {
 // 合并同类
 const mergeTree = (tree, id = '') => {
     const result = [];
-    if (!Array.isArray(tree)||!tree.length) return result;
+    if (!Array.isArray(tree) || !tree.length) return result;
     tree.forEach((item, index) => {
         // 查询是否存在
         const i = result.findIndex(t => t.label === item.label);
         const pid = `${id ? id + '-' : ''}${index}`;
 
         if (i > -1) {
-            result[i].children = mergeTree([...(result[i].children || []), ...(item.children||[])], result[i].id);
+            result[i].children = mergeTree([...(result[i].children || []), ...(item.children || [])], result[i].id);
         } else {
             result.push({
                 ...item,
                 id: pid,
                 pid: id,
                 children: item.children ? mergeTree(item.children, pid) : null
-            })
+            });
         }
     });
     return result;
-}
+};
 
 const groupByTitleArr = (array) => {
     // 转换格式

@@ -7,11 +7,11 @@
     </div>
     <div class="card-wrap">
       <div class="card-aside">
-        <FilterTree :data="data" :default-checked-keys="defaultCheckedList" @node-click="handleNodeClick" />
+        <FilterTree :data="store.filterData" :default-checked-keys="defaultCheckedList" @node-click="handleNodeClick" />
         <Load v-if="!data">请先导入</Load>
       </div>
       <div class="card-main">
-        <Priview v-if="!!currentSelected" :data="currentSelected" />
+        <FilterPrview v-if="!!currentSelected" :data="currentSelected" />
       </div>
     </div>
     <input type="file" id="file" @change="onFileChange" hidden ref="inputRef" />
@@ -29,12 +29,12 @@ import { ref, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getSuffix, readFile } from '@/utils';
 import { filterParse, flatArray, compileData } from '@/common/tool/filter.parse';
-// import { useCardStore } from '@/store/modules/useCardStore';
-import Priview from './container/Priview.vue';
+import { useFilterStore } from '@/store/modules/useFilterStore';
+import FilterPrview from './container/FilterPrview.vue';
 import Load from '@/components/Load/Load.vue';
 import FilterTree from '@/components/FilterTree/FilterTree.vue';
 
-// const cardStore = useCardStore();
+const store = useFilterStore();
 const inputRef = ref(null);
 const data = ref(null);
 const defaultCheckedList = ref([]);
@@ -62,6 +62,7 @@ const onFileChange = async e => {
   currentSelected.value = null;
   textarea.value = '';
   data.value = jsonData;
+  store.UPDATE_FILTER_DATA(jsonData);
   defaultCheckedList.value = flatArray(jsonData).filter(item => item.status).map(item => item.id);
 };
 const onImport = () => {
