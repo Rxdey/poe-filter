@@ -1,0 +1,67 @@
+Show # 命运卡 - 名字冲突的低价值卡先过滤
+    BaseType "The Wolf's Shadow" "The Master Artisan" "The Demoness"
+    SetTextColor 210 224 227 255
+    SetBackgroundColor 0 0 0 239
+    SetBorderColor 210 224 227 255
+    SetFontSize 38
+    PlayEffect 2 White Circle
+
+Show # 命运卡 - T1*
+    BaseType "The Apothecary" "The Doctor" "The Fiend" "House of Mirrors" "The Demon" "Unrequited Love" "Love Through Ice" "The Price of Devotion" "The Shieldbearer" "The Insane Cat" "Divine Beauty"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 255 40 0 229
+    SetBorderColor 255 40 0 0
+    SetFontSize 70
+    MinimapIcon 0 Red Square
+    PlayEffect Red true
+    CustomAlertSound "音效\超级卡片.mp3" 300
+    DisableDropSound
+
+Show # 命运卡 - T2*
+    BaseType "Abandoned Wealth" "The Dragon's Heart" "The Iron Bard" "The Samurai's Eye" "The Nurse" "Seven Years Bad Luck" "The Old Man" "Nook's Crown" "The Price of Loyalty" "Succor of the Sinless" "Gift of Asenath" "The Long Con" "Desecrated Virtue" "Winter's Embrace" "Broken Promises" "Deadly Joy" "Luminous Trove" "The Rabbit's Foot" "Eternal Bonds" "The Scout" "Judging Voices" "Magnum Opus" "Duality" "Imperfect Memories" "The Hook" "The Destination" "A Fate Worse Than Death" "Wealth and Power" "The Immortal" "Alluring Bounty" "The Cheater" "Brother's Stash" "The Wedding Gift" "The Leviathan"
+    SetTextColor 210 0 0 255
+    SetBackgroundColor 255 255 255 255
+    SetBorderColor 210 0 0 255
+    SetFontSize 50
+    MinimapIcon 0 Purple Square
+    PlayEffect Purple true
+    CustomAlertSound "音效\高级卡片.mp3" 300
+    DisableDropSound
+
+Show # 命运卡 - T3
+    BaseType "The Hoarder" "The Artist" "The Vast" "The Enlightened" "Hunter's Reward" "The Soul" "The Sephirot" "Dying Anguish" "The Spark and the Flame" "The Saint's Treasure" "Blessing of God" "The Undaunted" "The Celestial Stone" "The Mayor" "Burning Blood" "Pride of the First Ones" "Dark Dreams" "Remembrance" "Azyran's Reward" "The Eye of Terror" "The Damned" "The Escape" "The Chosen" "Etched in Blood" "The Strategist" "Council of Cats" "The Hive of Knowledge" "A Note in the Wind" "The Greatest Intentions" "The Sustenance" "The Awakened" "A Familiar Call" "The Gulf" "The Bitter Blossom" "The Academic" "Unchained" "The Whiteout" "Fateful Meeting" "The Astromancer" "Keeper's Corruption" "The Patient" "Brotherhood in Exile" "The Enthusiasts" "The Eternal War" "The Shortcut" "The Offspring" "The Price of Prescience" "Terrible Secret of Space" "Lachrymal Necrosis" "Dementophobia" "Ambitious Obsession" "Desperate Crusade" "Treasures of the Vaal" "The Magma Crab" "The Aspirant" "Bijoux" "Silence and Frost" "Beauty Through Death" "Monochrome" "The Tumbleweed" "Altered Perception" "Darker Half" "The Forward Gaze" "Further Invention" "Home" "Rebirth and Renewal" "Choking Guilt" "Doryani's Epiphany" "Endless Night" "Auspicious Ambitions" "Ever-Changing" "A Dusty Memory" "The Return of the Rat" "The Finishing Touch" "The Enforcer"
+    SetTextColor 3 15 254 255
+    SetBackgroundColor 255 255 255 255
+    SetBorderColor 3 15 254 255
+    SetFontSize 40
+    MinimapIcon 1 Cyan Square
+    PlayEffect Yellow true
+    CustomAlertSound "音效\中级卡片.mp3" 300
+    DisableDropSound
+
+Show # 命运卡 - T4
+    BaseType "The Dark Mage" "Chaotic Disposition" "The Pact" "The Celestial Justicar" "The Chains that Bind" "Humility" "The Aesthete" "Bowyer's Dream" "Last Hope" "The Warlord" "The Ethereal" "The Dapper Prodigy" "The Sephirot" "Heterochromia" "The Void" "Emperor of Purity" "The Valkyrie" "The Porcupine" "The Wretched" "The Wolven King's Bite" "The Valley of Steel Boxes" "The Obscured" "The Breach" "Immortal Resolve" "The Master" "Perfection" "The Professor" "The Endless Darkness" "The Price of Protection" "Boon of the First Ones" "The Sacrifice" "The Messenger" "Arrogance of the Vaal" "Alone in the Darkness" "The Progeny of Lunaris" "Vanity" "Imperial Legacy" "Baited Expectations" "The Craving" "The Easy Stroll" "The Eldritch Decay" "The White Knight" "Haunting Shadows" "Draped in Dreams" "A Modest Request" "The Emptiness" "A Stone Perfected" "Guardian's Challenge" "The Forgotten Treasure" "The One That Got Away" "Parasitic Passengers" "Misery in Darknes" "Justified Ambition" "The Side Quest" "The Dungeon Master" "The Brawny Battle Mage" "Alivia's Grace" "Man With Bear" "The Shepherd's Sandals" "Checkmate" "Something Dark"
+    SetTextColor 9 242 196 255
+    SetBackgroundColor 0 0 0 255
+    SetBorderColor 9 242 196 255
+    SetFontSize 38
+    MinimapIcon 2 Yellow Square
+    PlayEffect Yellow true
+    CustomAlertSound "音效\中级卡片.mp3" 300
+
+Show # 命运卡 - T5
+    BaseType "Three Faces in the Dark" "The Brittle Emperor" "Hope" "Vinia's Token" "The Summoner" "The Cataclysm" "The Hunger" "The Avenger" "Time-Lost Relic" "Lucky Connections" "Rain of Chaos" "The Watcher" "Coveted Possession" "The King's Heart" "The Wind" "Gemcutter's Promise" "The Inventor" "The Union" "The Queen" "Humility" "The Betrayal" "The Encroaching Darkness" "The Wrath" "The Catalyst" "The Survivalist" "The Jester" "Loyalty" "Pride Before the Fall" "Audacity" "Scholar of the Seas" "Anarchy's Price" "The Thaumaturgist" "The Fletcher" "The Cartographer" "The Offering" "The Lion" "The Risk" "Earth Drinker" "The Visionary" "The Throne" "Lucky Deck" "The Scavenger" "Mawr Blaidd" "The Polymath" "The Opulent" "No Traces" "The Blazing Fire" "Rebirth" "The Insatiable" "The Dreamer" "The World Eater" "The Jeweller's Boon" "The Darkest Dream" "The Fathomless Depths" "The Dreamland" "The Hale Heart" "The Rite of Elements" "The Innocent" "The Wilted Rose" "The Twilight Moon" "A Dab of Ink" "The Master Artisan" "The Life Thief" "The Seeker" "The Journey" "The Landing" "Sambodhi's Vow" "Burning Blood" "The Primordial" "The Fool" "The Heroic Shot" "The Bargain" "Akil's Prophecy" "Void of the Elements" "Underground Forest" "Deathly Designs" "Cameria's Cut" "Divine Justice" "The Bones" "Squandered Prosperity" "The Tinkerer's Table" "Peaceful Moments" "Triskaidekaphobia" "The Unexpected Prize" "The Journalist" "Acclimatisation" "Society's Remorse" "Reckless Ambition" "Sambodhi's Wisdom" "Prejudice" "A Sea of Blue" "The Mind's Eyes" "The Blessing of Moosh" "Costly Curio" "The Rabbit's Foot" "Chasing Risk" "The Prince of Darkness" "The Catch" "Disdain" "The Fox in the Brambles" "The Transformation" "The Tireless Extractor" "From Bone to Ashes"
+    SetTextColor 254 170 0 255
+    SetBackgroundColor 0 0 0 239
+    SetBorderColor 254 170 0 255
+    SetFontSize 38
+    MinimapIcon 2 White Square
+    CustomAlertSound "音效\卡片.mp3" 300
+    PlayEffect White false
+
+Show # 命运卡 - 剩余卡片(可一键屏蔽)
+    SetTextColor 210 224 227 255
+    SetBackgroundColor 0 0 0 239
+    SetBorderColor 210 224 227 255
+    SetFontSize 38
+    PlayEffect 2 White Circle

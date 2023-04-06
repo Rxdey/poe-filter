@@ -18,7 +18,7 @@ const parseLine = (str = '') => {
                 color.push(1);
             }
             tempObj[item] = `rgba(${color.join(',')})`;
-            return
+            return;
         }
         if (['SetFontSize'].includes(item)) {
             tempObj[item] = parseInt(tempList[item]);
@@ -36,7 +36,7 @@ const parseLine = (str = '') => {
                 color: miniMapIconConf[1] || '',
                 shape: miniMapIconConf[2] || '',
                 show: true,
-            }
+            };
             return;
         }
         if (['PlayEffect'].includes(item)) {
@@ -45,7 +45,7 @@ const parseLine = (str = '') => {
                 Colour: PlayEffectConf[0] || '',
                 Temp: !PlayEffectConf[1],
                 show: true,
-            }
+            };
             return;
         }
         return tempObj[item] = tempList[item];
@@ -55,7 +55,7 @@ const parseLine = (str = '') => {
             Colour: 'White',
             Temp: false,
             show: false,
-        }
+        };
     }
     if (!tempObj.MinimapIcon) {
         tempObj.PlayEffect = {
@@ -63,7 +63,7 @@ const parseLine = (str = '') => {
             color: 'White',
             shape: 'Circle',
             show: false,
-        }
+        };
     }
     // sharket的不标准 
     // 算了解析不了反正我不用
@@ -81,7 +81,7 @@ const parseLine = (str = '') => {
         deepLevel: titleStrArr.length - 1,
         titleArr: titleStrArr.length >= 3 ? titleStrArr.slice(1, titleStrArr.length - 1) : titleStrArr.slice(1, 2),
     };
-    
+
     return {
         ...titleObj,
         ...tempObj,
@@ -189,25 +189,46 @@ export const flatArray = (arr = []) => {
 
 // 还原数据
 export const compileData = (arr = []) => {
-    const exKey = ['title', 'scTitle', 'status', 'id', 'desc', 'className', 'disabled', 'label'];
+    // 解析时添加的字段或者不需要做操作的字段列表
+    const exKey = ['titleArr', 'status', 'id', 'pid', 'className', 'disabled', 'label', 'children', 'deepLevel'];
     return arr.map(item => Object.keys(item).reduce((prev, key) => {
         if (exKey.includes(key)) return prev;
         const data = item[key];
+        // 首句
         if (!prev) {
             const status = item.status ? 'Show' : 'Hide';
-            const st = item.desc ? `${item.scTitle} - ${item.desc}` : item.scTitle;
-            prev = `${status} # ${item.title} - ${st}\n`;
+            const TA = JSON.parse(JSON.stringify(item.titleArr));
+            if (item.label) TA.push(item.label);
+            prev = `${status} # ${TA.join(' - ')}\n`;
+            return prev;
         }
         if (key === 'BaseType' && !data) return prev;
-        if (!data) {
+        // 无值
+        if (!data || key === 'DisableDropSound') {
             prev += `    ${key}\n`;
+            return prev;
+        }
+        if (['PlayEffect', 'MinimapIcon'].includes(key)) {
+            delete data.show;
+            prev += `    ${key} ${Object.keys(data).map(a => data[a]).join(' ')}\n`;
+            return prev;
+        }
+        if (Array.isArray(data)) {
+            prev += `    ${key} ${data.join(' ')}\n`;
             return prev;
         }
         if (key === 'CustomAlertSound') {
             prev += `    ${key} "${data.split(' ')[0]}" ${data.split(' ')[1] || 300}\n`;
-        } else {
-            prev += `    ${key} ${data.split(',').join(' ').trim()}${key.endsWith('Color') ? ` # ${(item.desc || item.scTitle).replace('*', '')}${item.title}` : ''}\n`;
+            return prev;
         }
+        if (key.endsWith('Color')) {
+            const color = data.match(/rgba\((.*)?\)/)[1].split(',');
+            color[color.length - 1] = Math.floor(color[color.length - 1] * 255);
+            prev += `    ${key} ${color.join(' ').trim()}\n`;
+            return prev;
+        }
+        const d = typeof data === 'number' ? data : data.split(',').join(' ').trim();
+        prev += `    ${key} ${d}\n`;
         return prev;
     }, '')).join(`\n`);
 };

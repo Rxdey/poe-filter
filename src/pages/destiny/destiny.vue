@@ -108,21 +108,19 @@ const groupBy = (arr = [], key = '') => {
 const onSave = () => {
   const filterCard = JSON.parse(JSON.stringify(cardStore.filterCard));
   const result = [];
-  data.value[0].children.map((item, i) => {
-    item.children.forEach(card => {
-      const currentCard = groupBy(filterCard, card.label).map(item => item.type);
-      result.push({
-        ...card,
-        BaseType: currentCard.reduce((p, n) => {
-          p += `"${n}",`;
-          return p;
-        }, ''),
-        className: data.value[0].label
-      });
+  data.value[0].children.map((card, i) => {
+    const currentCard = groupBy(filterCard, card.label).map(item => item.type);
+    result.push({
+      ...card,
+      BaseType: currentCard.reduce((p, n) => {
+        p += `"${n}",`;
+        return p;
+      }, ''),
+      className: data.value[0].label
     });
   });
-  // console.log(result);
-  // console.log(compileData(result));
+  console.log(result);
+  console.log(compileData(result));
   showModal.value = true;
   textarea.value = compileData(result);
 };
@@ -134,9 +132,11 @@ const onSave = () => {
   display: flex;
   flex-flow: column;
 }
+
 .tool-bar {
   margin-bottom: 16px;
 }
+
 .card-wrap {
   width: 100%;
   height: 100%;
@@ -145,18 +145,20 @@ const onSave = () => {
   flex: 1;
   min-height: 1px;
   overflow: hidden;
+
   .card-aside {
     width: 280px;
     padding: 0 16px;
     overflow-y: auto;
   }
+
   .card-main {
     flex: 1;
     min-width: 1px;
     overflow-y: auto;
   }
 }
+
 .el-dialog.update-card-dialog {
   --el-dialog-width: 700px;
-}
-</style>
+}</style>
