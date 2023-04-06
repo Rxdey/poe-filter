@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onUnmounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getSuffix, readFile } from '@/utils';
 import { filterParse, flatArray, compileData } from '@/common/tool/filter.parse';
@@ -77,6 +77,10 @@ const groupBy = (arr = [], key = '') => {
 const onSave = () => {
 
 };
+
+onUnmounted(() => {
+  store.UPDATE_FILTER_DATA(null);
+});
 </script>
 
 <style lang="less" scoped>
