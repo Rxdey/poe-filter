@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    首页
+    <h3>流放之路过滤器编辑工具</h3>
+    <p>该项目(不支持Sharket！不支持Sharket！不支持Sharket！)</p>
   </div>
 </template>
 

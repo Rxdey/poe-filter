@@ -48,6 +48,14 @@ const parseLine = (str = '') => {
             };
             return;
         }
+        if (['CustomAlertSound'].includes(item)) {
+            const CustomAlertSound = tempList[item].split(' ');
+            tempObj[item] = {
+                path: CustomAlertSound[0],
+                vol: CustomAlertSound[1] || '300'
+            }
+            return;
+        }
         return tempObj[item] = tempList[item];
     });
     if (!tempObj.PlayEffect) {
@@ -218,7 +226,7 @@ export const compileData = (arr = []) => {
             return prev;
         }
         if (key === 'CustomAlertSound') {
-            prev += `    ${key} "${data.split(' ')[0]}" ${data.split(' ')[1] || 300}\n`;
+            prev += `    ${key} "${data.path}" ${data.vol}\n`;
             return prev;
         }
         if (key.endsWith('Color')) {

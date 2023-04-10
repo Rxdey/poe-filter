@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { CARD_INFO } from '@/common/data/item.static';
 import { toCamelWithSpace } from '@/utils';
 
-export const useCardStore = defineStore('comic', {
+export const useCardStore = defineStore('card', {
     state: () => ({
         allCardList: CARD_INFO(), // 全部卡片(编年史获取)
         filterCard: [], // 显示T级的卡片 
@@ -16,7 +16,10 @@ export const useCardStore = defineStore('comic', {
             this.filterCard = this.filterCard.filter(item => item.id !== id)
         },
         GET_ALL_CAR ({ page = 1, pagesize = 10}) {
-            return JSON.parse(JSON.stringify(this.allCardList)).slice((page - 1) * pagesize, pagesize * page);
+            // 深拷贝一份防止被修改
+            const allcard = JSON.parse(JSON.stringify(this.allCardList))
+            if (page === 0) return allcard;
+            return allcard.slice((page - 1) * pagesize, pagesize * page);
         },
         UPDATE_FILTER_CARD(list, data) {
             const { label } = data;

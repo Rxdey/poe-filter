@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, onUnmounted } from 'vue';
+import { ref, onUnmounted, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getSuffix, readFile } from '@/utils';
 import { filterParse, flatArray, compileData } from '@/common/tool/filter.parse';
@@ -62,7 +62,8 @@ const onFileChange = async e => {
   currentSelected.value = null;
   textarea.value = '';
   data.value = jsonData;
-  store.UPDATE_FILTER_DATA(jsonData);
+  console.log(store)
+  await store.UPDATE_FILTER_DATA(jsonData);
   defaultCheckedList.value = flatArray(jsonData).filter(item => item.status).map(item => item.id);
 };
 const onImport = () => {
@@ -80,6 +81,9 @@ const onSave = () => {
 
 onUnmounted(() => {
   store.UPDATE_FILTER_DATA(null);
+});
+onMounted(() => {
+  // console.log(store);
 });
 </script>
 

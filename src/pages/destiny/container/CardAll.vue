@@ -15,6 +15,7 @@
     </div>
     <template #footer>
       <span class="dialog-footer">
+        <span class="statistics">已加载: {{ currentList.length }} / {{ allCardData.length }}</span>
         <el-button type="danger" plain round @click="show = false" :disabled="loading">取消</el-button>
         <el-button round plain @click="onSubmit" :disabled="loading">我已选定</el-button>
       </span>
@@ -51,12 +52,15 @@ const carStore = useCardStore();
 const show = ref(props.modelValue);
 const emit = defineEmits(['update:modelValue']);
 const page = ref(1);
-const pagesize = ref(100);
+const pagesize = ref(50);
 const currentList = ref([]);
 const loading = ref(false);
 const loadingEnd = ref(false);
 const selecteData = ref([]); // 已选
 const screen = ref('');
+
+
+const allCardData = ref([]);
 
 const onSubmit = async () => {
   loading.value = true;
@@ -73,9 +77,11 @@ const onSubmit = async () => {
 
 const onSearch = val => {
   loadingEnd.value = true;
+  val = val.trim();
   if (!val) {
     page.value = 1;
     currentList.value = [];
+    getCarData();
     return;
   }
   const res = carStore.allCardList.filter(item => {
@@ -105,10 +111,21 @@ const onSelected = id => {
   }
 };
 
+const getCardByPage = ({ page = 1, pagesize = 10 }) => {
+  return JSON.parse(JSON.stringify(allCardData.value)).slice((page - 1) * pagesize, pagesize * page)
+}
+  // 改变方式 先全部拉下来，已选中的重排序置顶，再分页拉取
+const getAllCard = async () => {
+  allCardData.value = carStore.allCardList.map(item => ({
+    ...item,
+    selected: selecteData.value.some(c => c.id === item.id)
+  })).sort((a, b) => (a.selected ? 0 : 1) - (b.selected ? 0 : 1));
+  getCarData();
+};
 // 分页获取卡片，一次性加载太多会卡
 const getCarData = async () => {
-  const res = await carStore.GET_ALL_CAR({ page: page.value, pagesize: pagesize.value });
-  loading.value = false;
+  const res = getCardByPage({ page: page.value, pagesize: pagesize.value });
+  loading.value = true;
   currentList.value = currentList.value.concat(
     res.map(item => ({
       ...item,
@@ -117,6 +134,7 @@ const getCarData = async () => {
   );
   page.value += 1;
   loadingEnd.value = res.length < pagesize.value;
+  loading.value = false;
 };
 
 const onScroll = e => {
@@ -138,7 +156,10 @@ const beforeClose = done => {
 
 onMounted(() => {
   selecteData.value = carStore.allCardList.filter(item => props.defaultSelected.some(c => c.id === item.id));
-  getCarData();
+  loading.value = true;
+  setTimeout(() => {
+    getAllCard();
+  }, 200);
 });
 
 watch(
@@ -190,5 +211,12 @@ watch(
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #f5f5f5;
   }
+}
+.statistics {
+  position: absolute;
+  left: 20px;
+  bottom: 30px;
+  color: #999;
+  font-size: 12px;
 }
 </style>

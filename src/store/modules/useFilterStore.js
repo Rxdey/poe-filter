@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useFilterStore = defineStore('comic', {
+export const useFilterStore = defineStore('filter', {
     state: () => ({
         filterData: null
     }),

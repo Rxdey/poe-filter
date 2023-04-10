@@ -1,0 +1,51 @@
+.home {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+.destiny {
+  --el-dialog-width: 700px;
+}
+
+.tool-bar {
+  margin-bottom: 16px;
+}
+
+.card-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1;
+  min-height: 1px;
+  overflow: hidden;
+
+  .card-aside {
+    width: 280px;
+    padding: 0 16px;
+    overflow-y: auto;
+  }
+
+  .card-main {
+    flex: 1;
+    min-width: 1px;
+    overflow-y: auto;
+  }
+}
+
+.el-dialog.update-card-dialog {
+  --el-dialog-width: 700px;
+}
+
+.tip {
+  p {
+    margin-bottom: 8px;
+    a {
+      color: #d0adf0;
+    }
+    span {
+      font-weight: blod;
+      color: #0099ff;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <template>
-  <el-menu :default-active="defaultActive" class="el-menu" :collapse="isCollapse" @open="handleOpen" @close="handleClose" router>
-    <el-menu-item :index="menu.key" v-for="(menu, i) in menuList" :key="menu.key" :disabled="menu.disabled">
+  <el-menu :default-active="defaultActive" class="el-menu" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
+    <el-menu-item :index="menu.key" v-for="(menu, i) in menuList" :key="menu.key" :disabled="menu.disabled" @click="switchMenu(menu)">
       <el-icon>
         <Component :is="menu.icon" />
       </el-icon>
@@ -13,6 +13,7 @@
 import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
+const router = useRouter();
 const defaultActive = computed(() => {
   const route = useRoute();
   return route.name;
@@ -53,6 +54,13 @@ const handleOpen = (key, keyPath) => {
 const handleClose = (key, keyPath) => {
   // console.log(key, keyPath);
 };
+const switchMenu = (menu) => {
+  const { key } = menu;
+  router.replace({
+    path: key
+  })
+  
+}
 </script>
 
 <style lang="less" scoped>
