@@ -67,6 +67,7 @@ const onFileChange = async e => {
   const jsonData = filterParse(txt);
   console.log(jsonData);
   currentSelected.value = null;
+  currentMain.value = null;
   textarea.value = '';
   data.value = jsonData;
   console.log(store)
