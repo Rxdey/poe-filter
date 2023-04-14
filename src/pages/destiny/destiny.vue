@@ -24,7 +24,7 @@
 
   <el-dialog v-model="cardPoolShow" title="更新命运卡池" class="update-card-dialog" >
     <div class="tip">
-      <p>每个赛季命运卡池会有些许变化，需要自行添加更新</p>
+      <p>每个赛季命运卡池会有些许变化，本项目完全离线，所有需要自行添加更新</p>
       <p>点击此链接前往编年史 <a href="https://poedb.tw/cn/Divination_Cards#命运卡物品" target="_blank">流亡编年史#命运卡物品 </a></p>
       <p>页面加载完毕后，按<span class="code">F12</span>或者右键页面选择<span class="code">检查</span></p>
       <p>弹出页面选择<span class="code">控制台</span>(英文界面选择<span class="code">console</span>)</p>
