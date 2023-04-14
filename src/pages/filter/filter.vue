@@ -12,6 +12,7 @@
       </div>
       <div class="card-main">
         <FilterPrview v-if="!!currentSelected" :data="currentSelected" />
+        <FilterMain v-if="!!currentMain" :data="currentMain"/>
       </div>
     </div>
     <input type="file" id="file" @change="onFileChange" hidden ref="inputRef" />
@@ -31,6 +32,7 @@ import { getSuffix, readFile } from '@/utils';
 import { filterParse, flatArray, compileData } from '@/common/tool/filter.parse';
 import { useFilterStore } from '@/store/modules/useFilterStore';
 import FilterPrview from './container/FilterPrview.vue';
+import FilterMain from './container/FilterMain.vue';
 import Load from '@/components/Load/Load.vue';
 import FilterTree from '@/components/FilterTree/FilterTree.vue';
 
@@ -39,14 +41,19 @@ const inputRef = ref(null);
 const data = ref(null);
 const defaultCheckedList = ref([]);
 const currentSelected = ref(null);
+const currentMain = ref(null);
 const showModal = ref(false);
 const textarea = ref('');
 
 const handleNodeClick = node => {
   if ('status' in node) {
-    console.log(node);
+    currentMain.value = null;
     currentSelected.value = node;
+    return;
   }
+  currentSelected.value = null;
+  currentMain.value = node;
+  console.log(node);
 };
 
 const onFileChange = async e => {

@@ -43,7 +43,7 @@ const parseLine = (str = '') => {
             const PlayEffectConf = tempList[item].split(',');
             tempObj[item] = {
                 Colour: PlayEffectConf[0] || '',
-                Temp: !PlayEffectConf[1],
+                Temp: !!PlayEffectConf[1], // 光柱持续可见
                 show: true,
             };
             return;
@@ -66,7 +66,7 @@ const parseLine = (str = '') => {
         };
     }
     if (!tempObj.MinimapIcon) {
-        tempObj.PlayEffect = {
+        tempObj.MinimapIcon = {
             size: 2,
             color: 'White',
             shape: 'Circle',
@@ -216,9 +216,15 @@ export const compileData = (arr = []) => {
             prev += `    ${key}\n`;
             return prev;
         }
-        if (['PlayEffect', 'MinimapIcon'].includes(key)) {
+        if (key === 'MinimapIcon') {
             delete data.show;
             prev += `    ${key} ${Object.keys(data).map(a => data[a]).join(' ')}\n`;
+            return prev;
+        }
+        if (key === 'PlayEffect') {
+            if (!data.show) return prev;
+            console.log(data.Temp);
+            prev += `    ${key} ${data.Colour}${data.Temp ? ' Temp' : ''}\n`;
             return prev;
         }
         if (Array.isArray(data)) {

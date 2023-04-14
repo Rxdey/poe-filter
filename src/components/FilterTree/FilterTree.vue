@@ -1,5 +1,15 @@
 <template>
-  <el-tree ref="treeRef" :data="props.data" :props="props.defaultProps" node-key="id" show-checkbox highlight-current :indent="8" empty-text="" v-bind="$attrs">
+  <el-tree 
+    ref="treeRef" 
+    :data="props.data" 
+    :props="props.defaultProps" 
+    node-key="id" 
+    show-checkbox 
+    highlight-current 
+    :indent="8" 
+    empty-text="" 
+    v-bind="$attrs"
+  >
     <template #default="{ node, data }">
       <span class="custom-tree-node">
         <span>{{ node.label }}</span>
@@ -21,7 +31,8 @@ const props = defineProps({
     type: Object,
     default: () => ({
       children: 'children',
-      label: 'label'
+      label: 'label',
+      class: 'customTree'
     })
   }
 });

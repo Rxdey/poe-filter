@@ -1,1 +1,0 @@
-import{o as t,c as o,a as e}from"./index-9533db07.js";const s={class:"home"},a=e("h3",null,"流放之路过滤器编辑工具",-1),_=e("p",null,"该项目(不支持Sharket！不支持Sharket！不支持Sharket！)",-1),c=[a,_],d={__name:"home",setup(n){return(r,h)=>(t(),o("div",s,c))}};export{d as default};
