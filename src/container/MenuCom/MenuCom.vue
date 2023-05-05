@@ -34,8 +34,13 @@ const props = defineProps({
         // disabled: true
       },
       {
-        name: '命运卡',
+        name: '命运卡编辑',
         key: 'destiny',
+        icon: 'Cellphone'
+      },
+      {
+        name: '命运卡查看',
+        key: 'destinyView',
         icon: 'Cellphone'
       }
       // {

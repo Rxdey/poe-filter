@@ -1,6 +1,8 @@
 <template>
   <div class="Card">
-    <div class="card-background"><img v-if="data" :src="getImgUrl(data.id)" /></div>
+    <div class="card-background">
+      <img v-if="data" v-lazy="getImgUrl(data.id)"/>
+    </div>
     <div class="card-mask" v-if="data">
       <div :class="['card-stack', !data.stack ? 'single' : '']">{{ (data.stack || '1').replace(/\s/, '') }}</div>
       <div class="card-name">{{ data.name }}</div>

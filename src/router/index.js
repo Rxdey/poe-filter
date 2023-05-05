@@ -29,6 +29,14 @@ const routes = [
             title: '命运卡编辑'
         }
     },
+    {
+        path: '/destinyView',
+        name: 'destinyView',
+        component: () => import('@/pages/destinyView/destinyView.vue'),
+        meta: {
+            title: '命运卡查看'
+        }
+    },
 ];
 
 const router = createRouter({
